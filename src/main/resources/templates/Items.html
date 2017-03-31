@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/headcontent" th:remove="tag"></head>
+<body>
+<nav th:include="/Navbar" th:remove="tag"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4" th:each="item : ${items}">
+            <form th:action="@{/products}" method="post" th:object="${item}" commandName="addItemtocart" class="well form-horizontal"
+                  id="addItemtocart_form">
+                <input type="hidden" th:value="${item.id}"/>
+            <div class="thumbnail">
+                <div th:each=" image : ${item.images[0]}" class="product">
+                    <img th:src="${'/image/' + image.path}" alt="" class="product_image"/>
+                </div>
+                <div class="caption">
+                    <h3 th:text="${item.name}"></h3>
+                    <p th:text="${item.description}"></p>
+                    <p th:text="${'Price : ' + item.price +'$'}"></p>
+                    <p><a th:href="@{/itemView/{id}(id=${item.id})}" class="btn btn-primary" role="button">View</a>
+                    <div th:remove="tag" th:if ="${#httpServletRequest.remoteUser}">
+                        <a th:href="@{/cart/add/{id}(id=${item.id})}" class="btn btn-default">Add To Cart</a>
+
+                    </div>
+                    </p>
+
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

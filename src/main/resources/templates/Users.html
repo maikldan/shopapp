@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/headcontent" th:remove="tag"></head>
+<body>
+<div class="container">
+        <table class = "table-fill" id="student_table">
+            <thead>
+            <tr>
+                <th class="text-left">Id</th>
+                <th class="text-left">Username</th>
+                <th class="text-left">Password</th>
+                <th class="text-left">Profile</th>
+                <th class="text-left">Editing</th>
+            </tr>
+            </thead>
+            <tbody th:each="user : ${users}" class="table-hover">
+            <tr>
+                <td class="text-center" th:text="${user.Id}"></td>
+                <!--<td class="text-left"><img width="75" height="75" th:src = "'/files/' + ${student.picturePath}" alt=""/></td>-->
+                <td class="text-left"><p th:text="${user.username}"></p></td>
+
+                <td class="text-left" th:text="${user.password}"></td>
+                <td class="text-left" th:text="${user.profile.name}"></td>
+                <td class="text-left"><a th:href="@{/editUser/{id}(id=${user.id})}" class="btn btn-success">Edit <span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="form-group addStudentButton">
+            <a th:href="@{/user/add}" class="btn btn-warning">Add New One <span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+</div>
+</body>
+</html>

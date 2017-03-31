@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/headcontent" th:remove="tag"></head>
+<body>
+<form th:action="@{/products/add}" method="post" th:object="${item}" commandName="addItem" class="well form-horizontal"
+      id="addItem_form" enctype="multipart/form-data">
+      <div class="form-group">
+        <div class="col-md-4  addStudentLabel col-md-offset-3"><h2> Add New Item:</h2></div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Name : </label>
+        <div class="col-md-4 selectContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                <input th:field="*{name}" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Description : </label>
+        <div class="col-md-4 selectContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                <input th:field="*{description}" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Price : </label>
+        <div class="col-md-4 selectContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+                <input th:field="*{price}" class="form-control"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label">Category : </label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <select th:field="*{category}" class="form-control selectpicker">
+                    <option th:each="category : ${categories}" th:value="${category.Id}"><span
+                            th:text="${category.name}"></span>
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Images : </label>
+        <div class="col-md-4 inputGroupContainer">
+            <div class="input-group">
+        <input type="file" value="Upload Student image" th:field="*{imageMultiparts}" name="file"
+               class="upload" multiple="multiple"/>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+            <button type="submit" value="submit" class="btn btn-warning">Send<span
+                    class="glyphicon glyphicon-send"></span></button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

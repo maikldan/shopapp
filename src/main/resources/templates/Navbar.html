@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">ShopApp</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="/products">Products</a></li>
+                <li><a href="/products/add">Add Product</a></li>
+                <li><a href="/cart">Cart</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <div th:remove="tag" th:if ="${#httpServletRequest.remoteUser}">
+                    <li th:inline="text"><a>Hello [[${#httpServletRequest.remoteUser}]]!</a></li>
+                    <li><img style="border-radius: 50px;" height="45" width="45" th:src="${'/image/' + user.picturePath}" /></li>
+                    <li><form  th:action="@{/logout}" method="post" class="navbar-form navbar-right">
+                        <button  class="btn btn-default" type="submit" value="Sign Out">Sign Out</button>
+                    </form></li>
+                </div>
+                    <div th:remove="tag" th:unless="${#httpServletRequest.remoteUser}" >
+                        <li><a href="/login">Log In</a></li>
+                        <li><a href="/user/add">Registration</a></li>
+                    </div>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:include="/headcontent" th:remove="tag"></head>
+<body>
+<nav th:include="/Navbar" th:remove="tag"></nav>
+<div class="container">
+    <div class="row">
+        <form th:action="@{/cart/placeOrder}"  method="post"  commandName="addItemtocart"
+              id="addItemtocart_form">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Total</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each = "item : ${cart.contents}">
+                    <td class="col-sm-8 col-md-6">
+                        <div class="media">
+                            <a class="thumbnail pull-left" href="#">
+                                <div th:each=" image : ${item.key.images[0]}" class="product">
+                                    <img th:src="${'/image/' + image.path}" alt="" class="" width="75" height="75"/>
+                                </div>
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a href="#" th:text="${item.key.name}"></a></h4>
+                                <!--<span>Status: </span><span class="text-success"><strong>In Stock</strong></span>-->
+                            </div>
+                        </div></td>
+                    <td class="col-sm-1 col-md-1" style="text-align: center" th:text="${item.value}">
+                    </td>
+                    <td class="col-sm-1 col-md-1 text-center"><strong th:text="${item.key.price}"></strong></td>
+                    <td class="col-sm-1 col-md-1 text-center"><strong th:text="${item.key.price * item.value}"></strong></td>
+                    <td class="col-sm-1 col-md-1">
+                        <button type="button" class="btn btn-danger">
+                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><h3>Total</h3></td>
+                    <td class="text-right"><h5><strong th:text="${totalCost}"></strong></h5></td>
+                </tr>
+                <tr>
+                    <td>   </td>
+                    <td>   </td>
+                    <td>   </td>
+                    <td>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-shopping-cart"></span><a href="/products">Continue Shopping</a>
+                        </button></td>
+                    <td>
+                      <input type="submit" class="btn btn-success" value="Place Order"/>
+
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
